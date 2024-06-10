@@ -1,0 +1,41 @@
+task 2
+
+
+
+def calculate_grade(average_percentage):
+    if average_percentage >= 90:
+        return 'A'
+    elif average_percentage >= 80:
+        return 'B'
+    elif average_percentage >= 70:
+        return 'C'
+    elif average_percentage >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+def main():
+    subjects = int(input("Enter the number of subjects: "))
+    total_marks = 0
+    
+    for i in range(subjects):
+        while True:
+            try:
+                marks = float(input(f"Enter marks obtained in subject {i + 1} (out of 100): "))
+                if 0 <= marks <= 100:
+                    total_marks += marks
+                    break
+                else:
+                    print("Please enter marks between 0 and 100.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+    
+    average_percentage = total_marks / subjects
+    grade = calculate_grade(average_percentage)
+    
+    print(f"\nTotal Marks: {total_marks}")
+    print(f"Average Percentage: {average_percentage:.2f}%")
+    print(f"Grade: {grade}")
+
+if __name__ == "__main__":
+    main()

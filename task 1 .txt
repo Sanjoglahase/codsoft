@@ -1,0 +1,66 @@
+task 1 
+
+
+import random
+
+def generate_random_number(start, end):
+    return random.randint(start, end)
+
+def get_user_guess():
+    while True:
+        try:
+            return int(input("Enter your guess: "))
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def play_game():
+    start = 1
+    end = 100
+    random_number = generate_random_number(start, end)
+    attempts = 0
+    max_attempts = 10
+
+    print(f"\nGuess the number between {start} and {end}. You have {max_attempts} attempts.")
+
+    while attempts < max_attempts:
+        guess = get_user_guess()
+        attempts += 1
+
+        if guess < random_number:
+            print("Too low!")
+        elif guess > random_number:
+            print("Too high!")
+        else:
+            print(f"Congratulations! You've guessed the correct number {random_number} in {attempts} attempts.")
+            return attempts
+
+    print(f"Sorry, you've used all {max_attempts} attempts. The correct number was {random_number}.")
+    return attempts
+
+def main():
+    total_attempts = 0
+    rounds_won = 0
+    rounds_played = 0
+
+    while True:
+        rounds_played += 1
+        attempts = play_game()
+        total_attempts += attempts
+
+        if attempts <= 10:
+            rounds_won += 1
+
+        play_again = input("\nDo you want to play again? (yes/no): ").lower()
+        if play_again != 'yes':
+            break
+
+    if rounds_played > 0:
+        average_attempts = total_attempts / rounds_played
+    else:
+        average_attempts = 0
+
+    print(f"\nGame Over! You played {rounds_played} rounds and won {rounds_won} rounds.")
+    print(f"Your average attempts per round were: {average_attempts:.2f}")
+
+if __name__ == "__main__":
+    main()
